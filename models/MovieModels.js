@@ -33,11 +33,21 @@ const movieSchema = new mongoose.Schema({
       },
     },
   ],
+  view: {
+    type: Number,
+    default: 0,
+  },
   user: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
     //   required: true
   },
+  selectedBy: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+    },
+  ],
   createAt: {
     type: Date,
     default: Date.now(),

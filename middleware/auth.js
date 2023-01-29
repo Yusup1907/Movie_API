@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/UserModels.js");
 
 exports.isAuthUser = async (req, res, next) => {
-  const { token } = req.cookies['token']
+  const { token } = req.cookies;
 
   if (!token) {
     
@@ -16,7 +16,7 @@ exports.isAuthUser = async (req, res, next) => {
   next();
 };
 
-// Make Roles Admmin our Agen
+// Make Roles Admmin our user
 
 exports.authorizeRoles = (...roles) => {
   return (req, res, next) => {

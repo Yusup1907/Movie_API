@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "00072b44-5ebc-45e2-b55a-df397031ea95",
+		"name": "Movies_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18972809"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\": \"Yusup Setiawan\",\r\n    \"email\": \"yusupsetiawan12@gmail.com\",\r\n    \"password\": \"yusupsetiawan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"yusupsetiawan12@gmail.com\",\r\n    \"password\": \"yusupsetiawan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movies",
+			"item": [
+				{
+					"name": "Create Movies --Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Misteri Dua Kelinci\",\r\n    \"description\": \"Film ini di aktori oleh Yusup Setiawan pokoknya seru deeh\",\r\n    \"duration\": 120,\r\n    \"artist\": \"Yusup Setiawan\",\r\n    \"genre\": \"School\",\r\n    \"videos\":[\r\n        {\r\n            \"public_id\":\"videos.com\",\r\n            \"url\":\"videos.com\"\r\n        }\r\n    ],\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/movie/new",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"movie",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Movie --User",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Top 10 --User",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Movie --Admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"Misteri Dua Kelinci Season 13\",\r\n    \"description\":\"Film ini di aktori oleh Yusup Setiawan pokoknya seru deeh\",\r\n    \"duration\":34873,\r\n    \"artist\":\"Yusup Setiawan\",\r\n    \"genre\":\"School, Action\",\r\n    \"videos\":[\r\n        {\r\n            \"public_id\":\"videos.com\",\r\n            \"url\":\"videos.com\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/movie/63d5f7529acf5048361897c2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"movie",
+								"63d5f7529acf5048361897c2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Movie --Admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/movie/63d6029076b0b4044fcae9f8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"movie",
+								"63d6029076b0b4044fcae9f8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Movie List --User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/movie/63d5f7529acf5048361897c2/select",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"movie",
+								"63d5f7529acf5048361897c2",
+								"select"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delet Movie List --User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/movie/63d5f7529acf5048361897c2/unselect",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"movie",
+								"63d5f7529acf5048361897c2",
+								"unselect"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

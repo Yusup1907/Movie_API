@@ -35,16 +35,10 @@ exports.loginUser = async (req, res, next) => {
   if (!email || !password) {
     return next(new ErrorHandler("Please enter your email & password", 400));
   }
-
+  
   const user = await User.findOne({ email }).select("+password");
-  if (!user) {
-    return next(
-      new ErrorHandler("User is not found with this email & password", 401)
-    );
-  }
-
   const hashPassword = await user.comparePassword(password);
-  if (!hashPassword) {
+  if (!user || !hashPassword) {
     return next(
       new ErrorHandler("User is not found with this email & password", 401)
     );

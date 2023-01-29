@@ -1,23 +1,28 @@
-const Movie = require("../models/MovieModels.js");
+const Movie = require("../models/MovieModels");
 const Features = require("../utils/Features");
 
 exports.createMovie = async (req, res, next) => {
+  console.log(req.body); // Menambahkan console.log untuk mengecek nilai dari req.body
+  const { title, description, duration, artist, genre, videos } = req.body;
   try {
-    const movie = await Movie.create(req.body);
-    if (!movie) {
-      throw { code: 401, message: "movie create failed" };
-    }
-
+    const movie = new Movie({
+      title,
+      description,
+      duration,
+      artist,
+      genre,
+      videos,
+    });
+    console.log(movie); // Menambahkan console.log untuk mengecek nilai dari movie
+    await movie.save();
     res.status(201).json({
-      success: true,
-      movie,
+      status: "success",
+      data: movie,
     });
   } catch (err) {
-    if (!err.code) {
-      err.code = 500;
-    }
-    return res.status(err.code).json({
-      status: false,
+    console.log(err); // Menambahkan console.log untuk mengecek nilai dari err
+    res.status(400).json({
+      status: "fail",
       message: err.message,
     });
   }
@@ -92,10 +97,44 @@ exports.deleteMovie = async (req, res, next) => {
   });
 };
 
+// Add Movie --User
+
+exports.addMovie = async (req, res) => {
+  try {
+    // Menemukan film
+    const movie = await Movie.findById(req.params.id);
+    if (!movie) return res.status(404).json({ msg: "Movie not found" });
+
+    if (!movie.selectedBy) movie.selectedBy = [];
+
+    // Memeriksa apakah pengguna sudah memilih film ini sebelumnya
+    if (movie.selectedBy.includes(req.user.id))
+      return res.status(400).json({ msg: "Movie already selected" });
+
+    // Menambahkan ID pengguna ke array "selectedBy" pada film
+    movie.selectedBy.push(req.user.id);
+    await movie.save();
+    res.json(movie);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
 // Delete Movie User
 exports.deleteMovieUser = async (req, res) => {
   try {
-    const movie = await Movie.find({ userId: req.user._id });
+    // Menemukan film
+    const movie = await Movie.findById(req.params.id);
+    if (!movie) return res.status(404).json({ msg: "Movie not found" });
+
+    // Memeriksa apakah pengguna sudah memilih film ini sebelumnya
+    const index = movie.selectedBy.indexOf(req.user.id);
+    if (index === -1)
+      return res.status(400).json({ msg: "Movie not selected" });
+
+    // Menghapus ID pengguna dari array "user" pada film
+    movie.selectedBy.splice(index, 1);
+    await movie.save();
     res.json(movie);
   } catch (err) {
     if (!err.code) {
