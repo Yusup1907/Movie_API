@@ -1,6 +1,6 @@
 const User = require("../models/UserModels");
 const emailExist = require("../utils/emailExist");
-const sendToken = require("../utils/jsonWebToken.js");
+const sendToken = require("../utils/jsonwebtoken.js");
 
 // Register User
 
